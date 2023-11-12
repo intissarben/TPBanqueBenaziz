@@ -72,4 +72,10 @@ public class Modifier implements Serializable {
         Util.addFlashInfoMessage("Nom modifié avec succès : " + nom);
         return "listeComptes?faces-redirect=true";
     }
+    
+    public String modiff(){
+        gestionnaireCompte.modif(compteBancaire, nom, solde);
+        Util.addFlashInfoMessage("Nom modifié avec succès : " + nom);
+        return "listeComptes?faces-redirect=true";
+    }
 }

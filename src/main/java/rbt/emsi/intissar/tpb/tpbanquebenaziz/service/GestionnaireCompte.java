@@ -100,4 +100,12 @@ public class GestionnaireCompte {
     public void supprimerCompte(CompteBancaire compte) {
         em.remove(em.merge(compte));
     }
+    
+    @Transactional
+    public void modif(CompteBancaire compteBancaire, String nom, int solde) {
+        compteBancaire.setNom(nom);
+        compteBancaire.setSolde(solde);
+        update(compteBancaire);
+    }
+    
 }

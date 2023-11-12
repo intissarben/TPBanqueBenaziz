@@ -31,30 +31,27 @@
                         <h:outputLabel for="nom" value="Nouveau Nom:" />
                         <div>
                             <h:inputText id="nom" size="3" value="#{modifier.nom}" required="true" >
-
-                                <f:validateRegex pattern="[a-zA-Z]{3,}" />
-
                                 <f:attribute name="validatorMessage" value="Le nom doit contenir au moins 3 caractères et uniquement des lettres." />
                             </h:inputText>
                             <h:message for="nom" />
                         </div>
                     </h:panelGrid>
 
-            
+
                     <h:panelGrid columns="3">
                         <h:outputLabel for="solde" value="Nouveau Solde" />
                         <div>
-                            <h:inputText id="nom" size="3" value="#{modifier.solde}" required="true" >
+                            <h:inputText id="solde" size="3" 
+                                         value="#{modifier.solde}" 
+                                         required="false" 
+                                         converterMessage="le solde est un nombre entier positif"/>
+                            <h:message for="solde"/>
 
-                                <f:validateRegex pattern="[a-zA-Z]{3,}" />
 
-                                <f:attribute name="validatorMessage" value="Le nom doit contenir au moins 3 caractères et uniquement des lettres." />
-                            </h:inputText>
-                            <h:message for="nom" />
                         </div>
                     </h:panelGrid>
 
-                    <h:commandButton action="#{modifier.modif()}" value="Enregistrer les nouvelles informations"/>
+                    <h:commandButton action="#{modifier.modiff()}" value="Enregistrer les nouvelles informations"/>
                 </h:form>
             </ui:define>
 
