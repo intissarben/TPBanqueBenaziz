@@ -61,7 +61,26 @@ public class TransfertArgent implements Serializable {
     public String transferer() {
         CompteBancaire csource = gestionnaireCompte.getCompte(source);
         CompteBancaire cdestination = gestionnaireCompte.getCompte(destination);
+        int erreur = 0;
+        if (csource == null) {
+            Util.messageErreur("Aucun compte avec cet id !", "Aucun compte avec cet id !", "form:source");
+            erreur++;
+        } else {
+            if (csource.getSolde() < montant) {
+                Util.messageErreur("Solde insuffisant !", "Solde insuffisant sur le compte source pour effectuer le transfert !", "form:montant");
+                erreur++;
+            }
+        }
+        if (cdestination == null) {
+            Util.messageErreur("Aucun compte avec cet id !", "Aucun compte avec cet id !", "form:destination");
+            erreur++;
+        }
+        if (erreur > 0) {
+            return null;
+        }
         gestionnaireCompte.transferer(csource, cdestination, montant);
+
+        Util.addFlashInfoMessage("Transfert correctement effectué de " + csource.getNom() + " à " + cdestination.getNom());
         return "listeComptes?faces-redirect=true";
     }
 
