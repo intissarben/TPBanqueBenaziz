@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
+
+            <ui:define name="metadata">
+                <f:metadata>  
+                    <f:viewParam name="id" value="#{modifier.id}"  
+                                 required="true"/>  
+                    <f:viewAction action="#{modifier.loadCompte()}"/>  
+                </f:metadata>
+            </ui:define>
+            <ui:define name="top">
+                Modifier un compte
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>Modifier les information du compte numéro #{modifCompte.id}</h1>
+
+                <h:form>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="id" value="#{modifier.id}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="nom" value="Nouveau Nom:" />
+                        <div>
+                            <h:inputText id="nom" size="3" value="#{modifier.nom}" required="true" >
+
+                                <f:validateRegex pattern="[a-zA-Z]{3,}" />
+
+                                <f:attribute name="validatorMessage" value="Le nom doit contenir au moins 3 caractères et uniquement des lettres." />
+                            </h:inputText>
+                            <h:message for="nom" />
+                        </div>
+                    </h:panelGrid>
+
+            
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="solde" value="Nouveau Solde" />
+                        <div>
+                            <h:inputText id="nom" size="3" value="#{modifier.solde}" required="true" >
+
+                                <f:validateRegex pattern="[a-zA-Z]{3,}" />
+
+                                <f:attribute name="validatorMessage" value="Le nom doit contenir au moins 3 caractères et uniquement des lettres." />
+                            </h:inputText>
+                            <h:message for="nom" />
+                        </div>
+                    </h:panelGrid>
+
+                    <h:commandButton action="#{modifier.modif()}" value="Enregistrer les nouvelles informations"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
