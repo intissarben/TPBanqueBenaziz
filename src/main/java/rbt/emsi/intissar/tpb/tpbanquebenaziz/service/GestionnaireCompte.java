@@ -9,7 +9,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import java.util.List;
+import org.primefaces.behavior.ajax.AjaxBehavior;
 import rbt.emsi.intissar.tpb.tpbanquebenaziz.entity.CompteBancaire;
 
 /**
@@ -38,6 +40,7 @@ public class GestionnaireCompte {
     @PersistenceContext(unitName = "banquePU")
     private EntityManager em;
 
+    @Transactional
     public void creerCompte(CompteBancaire c) {
         em.persist(c);
     }
@@ -51,5 +54,22 @@ public class GestionnaireCompte {
     public long nbComptes() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM CompteBancaire c", Long.class);
         return query.getSingleResult();
+    }
+
+    public CompteBancaire getCompte(long id) {
+        return em.find(CompteBancaire.class, id);
+    }
+
+    @Transactional
+    public CompteBancaire update(CompteBancaire compteBancaire) {
+        return em.merge(compteBancaire);
+    }
+
+    @Transactional
+    public void transferer(CompteBancaire source, CompteBancaire destination, int montant) {
+        source.retirer(montant);
+        destination.deposer(montant);
+        update(source);
+        update(destination);
     }
 }
