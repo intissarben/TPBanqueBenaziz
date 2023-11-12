@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ul>
+            <li><h:link outcome="/index" value="Accueil"/></li>  
+            <li><h:link outcome="/listeComptes" value="liste des comptes"/></li>
+            <ui:remove>
+                <li><h:link outcome="/" value=""/></li>
+                <li><h:link outcome="/" value=""/></li>
+                <li><h:link outcome="/" value=""/></li>
+            </ui:remove>
+        </ul>
+    </h:body>
+</ui:composition>
